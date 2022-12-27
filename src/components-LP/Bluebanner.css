@@ -1,0 +1,40 @@
+.bluebanner{
+    margin: auto;
+    border-radius: 16px;
+    padding: 16px;
+    width: 1368px;
+    height: 326px;
+    background-color: darkblue;
+    color: white;
+}
+.bluebanner h1{
+    padding-top: 40px;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 54px;
+    text-align: center;
+}
+.bluebanner p{
+    margin: auto;
+    font-weight: 700;
+    width: 450px;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+}
+.bluebanner button{
+    border: none;
+    width: 170px;
+    height: 46px;
+    padding: 8px 12px 8px 12px;
+    border-radius:4px ;
+    margin-top: 50px;
+    margin-left: 600px;
+    color: white;
+    background-color: #5CB85F;
+}
+.bluebanner button:hover{
+    width: 178px;
+    height: 48px;
+    box-shadow: 1px 2px 8px 3px black;
+}

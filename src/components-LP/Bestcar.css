@@ -1,0 +1,33 @@
+.bestcar{
+    display: flex;
+    justify-content: center;
+    gap: 180px;
+    padding: 76px;
+    height: 500px;
+    
+}
+.bestcar-left{
+width: 460px;
+}
+
+.bestcar-right{
+width: 700px;
+padding-left: 100px;
+padding-top: 26px;
+}
+.bestcar-right p{
+    font-size: 14px;
+    font-weight: 700;
+    width: 468px;
+    line-height: 20px;
+}
+.bestcar-right span{
+    margin-right: 10px;
+}
+
+.img-bg-girl img{
+    bottom: 20px;
+    width: 100%;
+    height: 100%;
+    
+} 

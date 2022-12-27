@@ -1,0 +1,43 @@
+
+.navbar{
+    background-color: #F1F3FF;
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    
+}
+.logo{
+ padding-top: 10px;
+ margin-left: 250px;
+ margin-top: 6px;
+}
+.navbar h3{
+    background-color: darkblue;
+    color: darkblue;
+    width: 68px;
+}
+.nav-list{
+    
+    height: 50px;
+    padding-top: 14px;
+    margin-right: 400px;
+}
+.nav-list ul{
+    width:500px;
+    display: flex;
+    gap: 40px;
+
+}
+.nav-list li{
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    list-style: none;
+}
+.nav-list a{
+    text-decoration: none;
+    color: black;
+}
+.nav-list a:hover {
+    color: grey;
+}

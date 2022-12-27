@@ -1,0 +1,52 @@
+.testimonial{
+    padding-top: 24px;
+    
+ }
+ .testi-top{
+     padding-top: 26px;
+ }
+ .testi-top h1{
+     text-align: center;
+     font-weight:700 ;
+     font-size: 24px;
+     line-height: 36px;
+ }
+ .testi-top p{
+ 
+     text-align: center;
+     font-weight:700 ;
+     font-size: 14px;
+     line-height: 20px;
+ }
+ .testi-bottom{
+     height: 500px;
+    
+ }
+ .carousel{
+     border-radius: 10px;
+     margin-top: 76px;
+     height: 400px;
+     display: flex;
+ }
+ .carousel-cards{
+     background-color: #F1F3FF;
+     box-shadow: 2px 2px 8px 2px grey;
+     border-radius: 10px;
+     position: relative;
+     bottom: 60px;
+     display: flex;
+     margin: auto;
+     width: 900px;
+     height: 290px;
+ }
+ .carousel-left{
+     padding: 66px 30px;
+ 
+ }
+ .carousel-right{
+     padding:46px 26px;
+ }
+ .carousel-control-prev-icon, .carousel-control-next-icon{
+     background-color: #5CB85F;
+    
+ }

@@ -1,0 +1,24 @@
+.faq{
+    display: flex;
+    justify-content: space-around;
+    gap: 100px;
+    padding: 76px;
+    width: 1318px;
+    margin: auto;
+    height: 450px;
+}
+.faq-left h1{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 36px;
+}
+.faq-left p{
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+}
+.faq-right{
+    
+    width: 850px;
+    
+}
