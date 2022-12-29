@@ -8,6 +8,7 @@ const Hero = (props) => {
     const [click, setClick] = useState(true)
     const handleClick = () => {
         setClick(false)
+        
     }
 
     return (
@@ -17,9 +18,9 @@ const Hero = (props) => {
                     <h1>Sewa & Rental Mobil Terbaik di kawasan (Lokasimu)</h1>
                     <p>Selamat datang di Binar Car Rental. Kami menyediakan mobil kualitas terbaik dengan harga terjangkau. Selalu siap melayani kebutuhanmu untuk sewa mobil selama 24 jam.</p>
                     {
-                        props.isBtnShow ? (<Link to='/Carimobil'>
-                        <button onClick={handleClick}>Mulai Sewa Mobil</button>
-                        </Link>): null
+                        props.isBtnShow ? 
+                        null
+                        : (<Link to='/Carimobil'><button onClick={handleClick}>Mulai Cari Mobil</button></Link>)
                     }
                    
                     
