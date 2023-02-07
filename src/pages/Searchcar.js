@@ -58,7 +58,7 @@ const Searchcar = () => {
 
     return (
         <div>
-            <Navbar/>
+           <Link className='links' to='/'><Navbar/></Link>
             <Hero isBtnShow={true}/>
             <Carfilter  ishandlePricemax={handleChangePricemax} ishandlePricemin={handleChangePricemin} ishandleChangeName={handleChangeName} ishandleFilter={handleFilter} ishandleCategory={handleChangeCategory} ishandleStatus={handleChangeStatus}/>
              <div className="card-wraper">
@@ -73,7 +73,7 @@ const Searchcar = () => {
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                             </div>
                             <div>
-                                    <Link to={`/Detailmobil/${item.id}`}>
+                                    <Link to={`/detail-mobil/${item.id}`}>
                                     <button  className="btn-detail">Pilih Mobil</button>
                                     </Link>
                             </div>

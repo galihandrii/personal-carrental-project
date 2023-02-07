@@ -20,7 +20,7 @@ const Carfilter = (props) => {
                             <Form.Select  onChange={props.ishandleCategory} className= "input"  aria-label="Default select example">
                                 <option>Masukan Kapasitas</option>
                                 <option value="small">2-4 Orang</option>
-                                 <option value="medium">4-6 Orang</option>
+                                 <option value="Medium">4-6 Orang</option>
                                  <option value="large">6-8 Orang</option>
                              </Form.Select>
                      </Form.Group>

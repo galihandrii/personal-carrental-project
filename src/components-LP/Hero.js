@@ -20,7 +20,7 @@ const Hero = (props) => {
                     {
                         props.isBtnShow ? 
                         null
-                        : (<Link to='/Carimobil'><button onClick={handleClick}>Mulai Cari Mobil</button></Link>)
+                        : (<Link to='/cari-mobil'><button onClick={handleClick}>Mulai Cari Mobil</button></Link>)
                     }
                    
                     

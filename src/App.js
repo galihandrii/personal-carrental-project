@@ -12,10 +12,10 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<Landingpage/>}/>
-      <Route path='/Carimobil' element={<Searchcar/>}/>
-      <Route path='/Detailmobil/:id' element={<Detailcar/>}/>
-      <Route path='/Login' element={<Loginpage/>}/>
-      <Route path='/Register' element={<Registerpage/>}/>
+      <Route path='/cari-mobil' element={<Searchcar/>}/>
+      <Route path='/detail-mobil/:id' element={<Detailcar/>}/>
+      <Route path='/login' element={<Loginpage/>}/>
+      <Route path='/register' element={<Registerpage/>}/>
     </Routes>
       
      
