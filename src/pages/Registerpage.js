@@ -6,12 +6,20 @@ import Register from "../components-auth/Register";
 const Registerpage = () => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
+const [username, setUsername] = useState('');
 const navigate = useNavigate();
 
 const handleEmail = (e) => {
     setEmail(e.target.value)
     
 }
+
+const handleUsername = (e) => {
+    setUsername(e.target.value)
+    
+}
+
+
 const handlePassword = (e) => {
     setPassword(e.target.value)
     
@@ -19,6 +27,7 @@ const handlePassword = (e) => {
 const handleRegis = () => {
     const payload = {
         email: email,
+        username: username,
         password: password,
         role:'admin'
        
@@ -36,7 +45,7 @@ const handleRegis = () => {
 
     return(
         <div>
-            <Register handleEmail={handleEmail} handlePassword={handlePassword} handleRegis={handleRegis}/>
+            <Register handleEmail={handleEmail} handlePassword={handlePassword} handleRegis={handleRegis} handleUsername={handleUsername}/>
         </div>
 
     )

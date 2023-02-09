@@ -17,7 +17,6 @@ const Register = (props) => {
                  <Form.Label>Email address</Form.Label>
                  <Form.Control onChange={props.handleEmail} type="email" placeholder="Enter email" />
                  </Form.Group>
-
                  <Form.Group className="mb-3" controlId="formBasicPassword">
                  <Form.Label>Password</Form.Label>
                     <Form.Control onChange={props.handlePassword} type="password" placeholder="Password" />

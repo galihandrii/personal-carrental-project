@@ -13,7 +13,7 @@
 .cardesc-right{
     padding-left: 16px;
     width: 480px;
-    height: 580px;
+    height: 650px;
     border-radius: 10px;
     box-shadow: 1px 1px 4px 2px grey;
     border: grey 1px;
@@ -37,11 +37,11 @@
     
 }
 .car-cards-name p{
-    padding-top: 60px;
+    padding-top: 26px;
     font-weight: bold;
 }
-.car-cards-name span{
-    padding-left: 290px;
+.span-price{
+    padding-left: 270px;
     font-weight: bold;
 }
 
@@ -49,7 +49,7 @@
     height: 250px;
 }
 .car-cards-name-price-top{
-    height: 140px;
+    height: 80px;
 }
 .car-cards-img{
     width: 450px;
@@ -68,14 +68,27 @@
     color: white;
     font-size: 16px;
 }
+.p-category{
+    
+    font-size: 13px;
+    color: grey;
+}
+.span-category{
+    font-size: 12px;
+    margin-left: 10px;
+}
+
 .date-range{
     display: flex;
     border: 1px solid #009C96;
     border-radius: 2px;
-    padding: 9px 10px;
+    padding: 8px 10px;
     margin-top: 8px;
 }
 .react-datepicker__input-container input {
     border: none;
     width: 100%;
+}
+.btn-disable-pick-date{
+   opacity: 0.3;
 }

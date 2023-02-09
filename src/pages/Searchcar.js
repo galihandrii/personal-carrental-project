@@ -56,6 +56,17 @@ const Searchcar = () => {
         setFpricemax(e.target.value)
     }
 
+
+
+    function dotCurrency(number) {
+        const currency = number;
+        return new Intl.NumberFormat('de-DE').format(currency)
+    }
+
+    
+
+
+
     return (
         <div>
            <Link className='links' to='/'><Navbar/></Link>
@@ -69,7 +80,7 @@ const Searchcar = () => {
                             <div className="img-car"><img src={item.image}/></div>
                             <div className="item-con">
                                  <h4>{item.name}</h4>
-                                <p><strong>Rp.{item.price}/hari</strong></p>
+                                <p><strong>Rp. {dotCurrency(item.price)}/hari</strong></p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                             </div>
                             <div>

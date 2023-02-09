@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
+import { TbUserCircle } from "react-icons/tb"
 
 
 const Navbar = () => {
@@ -39,7 +40,7 @@ const Navbar = () => {
                          <li><a href="#faq">FAQ</a></li>
                          <li>
                             {
-                                isLogin ? (<a href=''  onClick={handleLogout}>Log Out</a>) : (
+                                isLogin ? (<a href=''  onClick={handleLogout}><TbUserCircle size={22}/></a>) : (
                                     <Link to='/login'>
                                      <a>Log In</a>
                                     </Link>

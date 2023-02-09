@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import "./Aboutpackage.css"
 import { useParams } from "react-router-dom";
+import {FiUsers, FiCalendar } from "react-icons/fi";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 
 const Aboutpackage = () => {
@@ -58,13 +61,50 @@ useEffect(()=>{
         axios
         .get(`https://bootcamp-rent-cars.herokuapp.com/customer/car/${id}`)
         .then((res)=>{
-            //console.log(res);
+            console.log(res);
             setCar(res.data);
         })
         .catch((err)=> console.log(err.message))
     },[])
     
+
+
+    function dotCurrency(number) {
+        const currency = number;
+        return new Intl.NumberFormat('de-DE').format(currency)
+    }
+
+
+    function PriceTotal(){
+        const isPrice = car.price
+        const dateCount = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24))
+        const totalPrice = isPrice * (dateCount+1)
+        if ((dateCount >= 0) && (dateCount < 7)) {
+            return dotCurrency(totalPrice)
+        } else if (dateCount < 0) {
+            return 0
+        } else {
+            return "- (Lebih dari 7 hari)"
+        }
+    }
+
+    function HandleButton() {
+        if ((startDate != null) && (endDate != null))  {
+            return(
+                <Link to={`/payment/${car.id}`} >
+                    <Button  variant="success">Lanjutkan Ke Pembayaran</Button>
+                </Link>
+            )
+        } else  {
+            return(
+                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Pilih Tanggal Sewa</Tooltip>}>
+                    <Button variant="success" className="btn-disable-pick-date">Lanjutkan Ke Pembayaran</Button>
+                </OverlayTrigger>
+            ) 
+        }
+    }
    
+    
     return(
         <div className="cardesc">
             <div className="cardesc-left">
@@ -114,10 +154,35 @@ useEffect(()=>{
                 <div className="car-cards-name">
                     {
                         isLogin ? (<div className="car-cards-name-price">
-                            <div className="car-cards-name-price-top">
+                            <div>
                             <h3>{car.name}</h3>
-                                <p>Total:<span>Rp.{car.price}</span></p>
+                            <p className="p-category"><FiUsers size={14}/>
+                            <span className="span-category">
+                            {(() => {
+                                                if (car.category === "small" ){
+                                                    return(
+                                                        '2-4 orang'
+                                                    )
+                                                } else if (car.category === "Medium" ) {
+                                                    return(
+                                                        '4-6 orang'
+                                                    )
+                                                } else if (car.category === "large" ) {
+                                                    return(
+                                                        '6-8 orang'
+                                                    )
+                                                } else {
+                                                    return(
+                                                        '-'
+                                                    )
+                                                }
+                                            })()}
+                                
+                                
+                                </span><br/><br/>Tentukan lama sewa mobil (Max 7 hari)</p>
+                                   
                             </div>
+                            
 
                             {/*========== Date Picker Zone ===========*/ }
                             <div className="date-range">
@@ -137,11 +202,18 @@ useEffect(()=>{
                             placeholderText="Pilih tanggal mulai dan tanggal akhir sewa"
                             //showDisabledMonthNavigation
                             />
+                            <span><FiCalendar size={20}/></span>
                             </div>
                             {/*========================================*/}
 
+                            <div className="car-cards-name-price-top">
+                                <p>Total:<span className="span-price">Rp. {PriceTotal()}</span></p>
+                            </div>
+
+                            
+
                             <div className="cardesc-right-button">
-                            <Link to='/login'><Button  variant="success">Lanjutkan Ke Pembayaran</Button></Link>
+                            <HandleButton/>
                             </div>
                         </div>):(
                             <div className="car-cards-name-price">
