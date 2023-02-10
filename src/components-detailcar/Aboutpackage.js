@@ -11,12 +11,14 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 
+
 const Aboutpackage = () => {
-const [isLogin, setIsLogin]= useState(false);
+//const [isLogin, setIsLogin]= useState(false);
 const [startDate, setStartDate] = useState(new Date());
 const [endDate, setEndDate] = useState(null);
 const {id} = useParams();
 const [car,setCar]= useState({})
+
 const [description, setDescription] = useState([{
     id: 1,
     include:"apa saja yang termasuk dalam paket misal durasi max 12 jam",
@@ -45,17 +47,6 @@ const [description, setDescription] = useState([{
 ]);
 
 
-
-useEffect(()=>{
-    const token = localStorage.getItem("token");
-        if (!token){
-            setIsLogin(false);
-        } else {
-            setIsLogin(true);
-        }
-},[])
-
-
     
     useEffect(()=>{
         axios
@@ -75,10 +66,12 @@ useEffect(()=>{
     }
 
 
-    function PriceTotal(){
         const isPrice = car.price
         const dateCount = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24))
         const totalPrice = isPrice * (dateCount+1)
+
+    function PriceTotal(){
+        
         if ((dateCount >= 0) && (dateCount < 7)) {
             return dotCurrency(totalPrice)
         } else if (dateCount < 0) {
@@ -88,14 +81,18 @@ useEffect(()=>{
         }
     }
 
+   
+
+
     function HandleButton() {
-        if ((startDate != null) && (endDate != null))  {
+      
+        if ((startDate != null) && (endDate != null) && (dateCount <= 7))  {
             return(
                 <Link to={`/payment/${car.id}`} >
                     <Button  variant="success">Lanjutkan Ke Pembayaran</Button>
                 </Link>
             )
-        } else  {
+        }  else  {
             return(
                 <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Pilih Tanggal Sewa</Tooltip>}>
                     <Button variant="success" className="btn-disable-pick-date">Lanjutkan Ke Pembayaran</Button>
@@ -104,6 +101,8 @@ useEffect(()=>{
         }
     }
    
+
+    
     
     return(
         <div className="cardesc">
@@ -152,8 +151,8 @@ useEffect(()=>{
             <div className="car-cards">
                 <div className="car-cards-img"><img src={car.image} alt={car.name}/></div>
                 <div className="car-cards-name">
-                    {
-                        isLogin ? (<div className="car-cards-name-price">
+                    
+                <div className="car-cards-name-price">
                             <div>
                             <h3>{car.name}</h3>
                             <p className="p-category"><FiUsers size={14}/>
@@ -196,6 +195,7 @@ useEffect(()=>{
                             } 
                             startDate={startDate}
                             endDate={endDate}
+                            minDate={new Date()}
                             selectsRange
                             dateFormat="dd MMMM yyyy"
                             isClearable={true}
@@ -207,7 +207,7 @@ useEffect(()=>{
                             {/*========================================*/}
 
                             <div className="car-cards-name-price-top">
-                                <p>Total:<span className="span-price">Rp. {PriceTotal()}</span></p>
+                                <p>Total:<span className="span-price">Rp {PriceTotal()}</span></p>
                             </div>
 
                             
@@ -215,16 +215,9 @@ useEffect(()=>{
                             <div className="cardesc-right-button">
                             <HandleButton/>
                             </div>
-                        </div>):(
-                            <div className="car-cards-name-price">
-                                <div>
-                                <h3>{car.name}</h3>
-                                <p>Total :<span>Rp.{car.price}</span></p>
-                                </div>
-                                <div className="cardesc-right-button"><Link to='/login'><Button variant="info">Sign In For Rent</Button></Link></div>
-                            </div>
-                        )
-                    }
+                        </div>:
+                        
+                       
                     
 
                 </div>

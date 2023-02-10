@@ -7,6 +7,7 @@ import Detailcar from './pages/Detailcar';
 import Loginpage from './pages/Loginpage';
 import Registerpage from './pages/Registerpage';
 import Payment from './pages/Paymentpage';
+import ProtectedRoute from './hoc/ProtectedRoute';
 
 
 function App() {
@@ -17,7 +18,12 @@ function App() {
       <Route path='/detail-mobil/:id' element={<Detailcar/>}/>
       <Route path='/login' element={<Loginpage/>}/>
       <Route path='/register' element={<Registerpage/>}/>
+      <Route element={<ProtectedRoute/>}>
       <Route path='/payment/:id' element={<Payment/>}/>
+      </Route>
+      
+      
+      
     </Routes>
       
      

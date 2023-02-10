@@ -40,7 +40,7 @@ const Navbar = () => {
                          <li><a href="#faq">FAQ</a></li>
                          <li>
                             {
-                                isLogin ? (<a href=''  onClick={handleLogout}><TbUserCircle size={22}/></a>) : (
+                                isLogin ? (<a  href=''  onClick={handleLogout}><TbUserCircle className="user-icon" size={20}/><span className="logout-btn">Log Out</span></a>) : (
                                     <Link to='/login'>
                                      <a>Log In</a>
                                     </Link>
