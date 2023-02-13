@@ -68,7 +68,7 @@ const [description, setDescription] = useState([{
 
         const isPrice = car.price
         const dateCount = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24))
-        const totalPrice = isPrice * (dateCount+1)
+        const totalPrice = isPrice * (dateCount)
 
     function PriceTotal(){
         
@@ -215,7 +215,7 @@ const [description, setDescription] = useState([{
                             <div className="cardesc-right-button">
                             <HandleButton/>
                             </div>
-                        </div>:
+                        </div>
                         
                        
                     

@@ -1,0 +1,11 @@
+.bg-plain-1{
+    background-color: #F1F3FF;
+    height: 80px;
+}
+.bg-plain-2{
+    background-color: #F1F3FF;
+    height: 150px;
+}
+.bg-plain-2-comp {
+    margin-top: -20px;
+}

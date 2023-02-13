@@ -6,7 +6,7 @@ import Searchcar from './pages/Searchcar';
 import Detailcar from './pages/Detailcar';
 import Loginpage from './pages/Loginpage';
 import Registerpage from './pages/Registerpage';
-import Payment from './pages/Paymentpage';
+import Paymentpage from './pages/Paymentpage';
 import ProtectedRoute from './hoc/ProtectedRoute';
 
 
@@ -19,7 +19,7 @@ function App() {
       <Route path='/login' element={<Loginpage/>}/>
       <Route path='/register' element={<Registerpage/>}/>
       <Route element={<ProtectedRoute/>}>
-      <Route path='/payment/:id' element={<Payment/>}/>
+      <Route path='/payment/:id' element={<Paymentpage/>}/>
       </Route>
       
       

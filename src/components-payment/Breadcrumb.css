@@ -1,0 +1,28 @@
+.bread-crumb{
+    display: flex;
+    justify-content: space-around;
+    background-color: #F1F3FF;
+    margin: auto;
+    
+}
+.bc-arrow a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.bc-word h6{
+    padding-left: 6px;
+    padding-top: 3px;
+}
+.bc-step{ 
+    display: flex;
+    gap: 26px;
+}
+.bc-step-flex{
+    display: flex;
+}
+.bc-line{
+    padding-left: 12px;
+}
