@@ -16,11 +16,16 @@ import 'moment/locale/id'
 
 const Aboutpackage = () => {
 //const [isLogin, setIsLogin]= useState(false);
-const [startDate, setStartDate] = useState(new Date());
-const [endDate, setEndDate] = useState(null);
+
+const [dateRange, setDateRange] = useState([null,null]);
+const [startDate, endDate] = dateRange;
 const {id} = useParams();
 const [car,setCar]= useState({})
 const navigate = useNavigate();
+//const FixPrice = PriceTotal()
+const isPrice = car.price
+const dateCount = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24))
+const totalPrice = isPrice * (dateCount + 1)
 
 const [description, setDescription] = useState([{
     id: 1,
@@ -69,9 +74,7 @@ const [description, setDescription] = useState([{
     }
 
 
-        const isPrice = car.price
-        const dateCount = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24))
-        const totalPrice = isPrice * (dateCount + 1)
+        
 
     function PriceTotal(){
         
@@ -85,9 +88,13 @@ const [description, setDescription] = useState([{
     }
 
 
-    const FixPrice = PriceTotal()
+    //const FixPrice = PriceTotal()
 
+    // formating date
+    const start = moment(startDate).format('YYYY-MM-DD')
+    const end = moment(endDate).format('YYYY-MM-DD')
    
+    //console.log(start,end);
    
     const handleBtnSetOrder = async(id) => {
         const token = localStorage.getItem("token")
@@ -98,8 +105,8 @@ const [description, setDescription] = useState([{
         }
         
         const payload = {
-            start_rent_at: moment(startDate).format('L'),
-            finish_rent_at: moment(endDate).format('L'),
+            start_rent_at: start,
+            finish_rent_at: end,
             car_id: car.id,
             
         }
@@ -110,7 +117,7 @@ const [description, setDescription] = useState([{
             // localStorage.setItem('car_id', id)
             // localStorage.setItem("start", startDate)
             // localStorage.setItem("end", endDate)
-             localStorage.setItem('total price', FixPrice)
+            // localStorage.setItem('total price', FixPrice)
 
             navigate(`/Payment/${res.data.id}`);
         } catch (error) {
@@ -123,9 +130,9 @@ const [description, setDescription] = useState([{
       
         if ((startDate != null) && (endDate != null) && (dateCount <= 7))  {
             return(
-                <Link to={`/payment/${car.id}`} >
+                //<Link to={`/payment/${car.id}`} >
                     <Button  onClick={handleBtnSetOrder} variant="success">Lanjutkan Ke Pembayaran</Button>
-                </Link>
+                //</Link>
             )
         }  else  {
             return(
@@ -221,21 +228,17 @@ const [description, setDescription] = useState([{
                             {/*========== Date Picker Zone ===========*/ }
                             <div className="date-range">
                             <DatePicker 
-                            selected={startDate} 
-                            onChange={(date) => {
-                                const [start, end] = date;
-                                setStartDate(start);
-                                setEndDate(end);
-                            } 
-                            } 
+                            selectsRange={true}
                             startDate={startDate}
                             endDate={endDate}
                             minDate={new Date()}
-                            selectsRange
+                            onChange={(update) => {
+                                setDateRange(update);
+                            }}
                             dateFormat="dd MMMM yyyy"
                             isClearable={true}
                             placeholderText="Pilih tanggal mulai dan tanggal akhir sewa"
-                            //showDisabledMonthNavigation
+                            showDisabledMonthNavigation
                             />
                             <span><FiCalendar size={20}/></span>
                             </div>

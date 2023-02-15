@@ -3,12 +3,23 @@ import { AiOutlineArrowLeft, AiOutlineLine } from "react-icons/ai";
 import stepone from "../assets/bc-step1.png"
 import steptwo from "../assets/bc-step2.png"
 import stepthree from "../assets/bc-step3.png"
+import { useNavigate } from "react-router-dom";
+
 
 const Breadcrumb = () => {
+const navigate = useNavigate()
+
+
+const handleBack = () => {
+  return  navigate(-1)
+}
+
+
+
     return (
          <div className="bread-crumb">
             <div className="bc-arrow">
-            <a href='#'><AiOutlineArrowLeft/>  Pembayaran</a>
+            <a href='#' onClick={handleBack}><AiOutlineArrowLeft/>  Pembayaran</a>
             </div>
             <div className="bc-step">
             <div className="bc-step-flex">

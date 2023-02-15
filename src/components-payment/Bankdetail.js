@@ -17,6 +17,8 @@ const navigate = useNavigate();
 const [isBcaTrue, setIsBcaTrue] = useState(false)
 const [isBniTrue, setIsBniTrue] = useState(false)
 const [isMandiriTrue, setIsMandiriTrue] = useState(false)
+const [startDate, setStartDate] = useState(new Date());
+const [endDate, setEndDate] = useState(null);
 
 
 
@@ -29,20 +31,18 @@ useEffect(()=>{
         },  
     }
     
-
-    
   axios
   .get(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}`,config)
   .then((ress) => {
-       console.log(ress.data)
+       //console.log(ress)
       setCar(ress.data)
   })
   .catch((err) => console.log(err.message))
 },[])
 
-const dateStart = moment(localStorage.getItem("start"))
-const dateEnd = moment(localStorage.getItem("end"))
-const thePrice = localStorage.getItem('total price')
+// const dateStart = moment(localStorage.getItem("start"))
+// const dateEnd = moment(localStorage.getItem("end"))
+// const thePrice = localStorage.getItem('total price')
 
 //const longDate = (Math.round((dateEnd - dateStart) / (1000 * 60 * 60 * 24))) + 1
 
@@ -62,7 +62,7 @@ const thePrice = localStorage.getItem('total price')
                         <FiChevronDown size={24}/>
                     </div>
                     <div className="bd-right-detailorder-price">
-                      <p> Rp {thePrice}</p>
+                      <p> Rp </p>
                     </div>
                 </div>
             </div>
@@ -92,28 +92,7 @@ const thePrice = localStorage.getItem('total price')
     }
 
 
-    const handleConfirmPay = () => {
-        const token = localStorage.getItem("token")
-        const config = {
-            headers: {
-                access_token: token
-            },
-        }
-        const payload = {
-            start_rent_at: dateStart._d,
-            finish_rent_at: dateEnd._d,
-            car_id: id
-        }
-
-        axios
-            .post("https://bootcamp-rent-cars.herokuapp.com/customer/order", payload, config)
-            .then((ress) => {
-                localStorage.setItem("car_id", id)
-                navigate(`/payment-confirm/${ress.data.id}`)
-                // localStorage.setItem("order-id", ress.data.id)
-            })
-            .catch((err) => console.log(err.message))
-    }
+    
 
 
 
