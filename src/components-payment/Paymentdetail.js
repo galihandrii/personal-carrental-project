@@ -14,16 +14,17 @@ useEffect(()=>{
     axios
             .get(`https://bootcamp-rent-cars.herokuapp.com/customer/car/${id}`)
             .then((ress) => {
-                // console.log(ress.data)
-                setCar(ress.data)
+                 console.log(ress.data)
+                //setCar(ress.data)
             })
             .catch((err) => console.log(err.message))
 },[])
 
-const dateStart = moment(localStorage.getItem("start"))
-const dateEnd = moment(localStorage.getItem("end"))
-const longDate = (Math.round((dateEnd - dateStart) / (1000 * 60 * 60 * 24))) + 1
+// const dateStart = moment(localStorage.getItem("start"))
+// const dateEnd = moment(localStorage.getItem("end"))
+// const longDate = (Math.round((dateEnd - dateStart) / (1000 * 60 * 60 * 24))) + 1
 
+const updateAt = moment(car.updateAt).format('LL')
    
 
 
@@ -58,11 +59,11 @@ return (
                 </div>
                 <div>
                     <h6>Tanggal Sewa</h6>
-                    <p>{dateStart.format('LL')}</p>
+                    <p>{}</p>
                 </div>
                 <div>
                     <h6>Tanggal Akhir Sewa</h6>
-                    <p>{dateEnd.format("LL")}</p>
+                    <p>{}</p>
                 </div>
 
             </div>

@@ -8,6 +8,7 @@ import Loginpage from './pages/Loginpage';
 import Registerpage from './pages/Registerpage';
 import Paymentpage from './pages/Paymentpage';
 import ProtectedRoute from './hoc/ProtectedRoute';
+import PaymentConfirm from './pages/Paymentconfirm';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path='/register' element={<Registerpage/>}/>
       <Route element={<ProtectedRoute/>}>
       <Route path='/payment/:id' element={<Paymentpage/>}/>
+      <Route path='/payment-confirm/id' element={<PaymentConfirm/>}/>
       </Route>
       
       

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Aboutpackage.css"
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {FiUsers, FiCalendar } from "react-icons/fi";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -9,6 +9,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import moment from "moment/moment";
+import 'moment/locale/id'
 
 
 
@@ -18,6 +20,7 @@ const [startDate, setStartDate] = useState(new Date());
 const [endDate, setEndDate] = useState(null);
 const {id} = useParams();
 const [car,setCar]= useState({})
+const navigate = useNavigate();
 
 const [description, setDescription] = useState([{
     id: 1,
@@ -82,19 +85,46 @@ const [description, setDescription] = useState([{
     }
 
 
-    const handleBtnSetDate = () => {
-        localStorage.setItem("start", startDate)
-        localStorage.setItem("end", endDate)
-    }
-   
+    const FixPrice = PriceTotal()
 
+   
+   
+    const handleBtnSetOrder = async(id) => {
+        const token = localStorage.getItem("token")
+        const config = {
+            headers: {
+                access_token: token
+            },
+        }
+        
+        const payload = {
+            start_rent_at: moment(startDate).format('L'),
+            finish_rent_at: moment(endDate).format('L'),
+            car_id: car.id,
+            
+        }
+            console.log(payload);
+        try {
+            const res = await axios.post('https://bootcamp-rent-cars.herokuapp.com/customer/order',payload,config);
+            console.log(res.data)
+            // localStorage.setItem('car_id', id)
+            // localStorage.setItem("start", startDate)
+            // localStorage.setItem("end", endDate)
+             localStorage.setItem('total price', FixPrice)
+
+            navigate(`/Payment/${res.data.id}`);
+        } catch (error) {
+            console.log(error.message);
+           // setError(error.response.data.message)
+        }
+    }
 
     function HandleButton() {
       
         if ((startDate != null) && (endDate != null) && (dateCount <= 7))  {
             return(
                 <Link to={`/payment/${car.id}`} >
-                    <Button  onClick={handleBtnSetDate} variant="success">Lanjutkan Ke Pembayaran</Button>
+                    <Button  onClick={handleBtnSetOrder} variant="success">Lanjutkan Ke Pembayaran</Button>
                 </Link>
             )
         }  else  {

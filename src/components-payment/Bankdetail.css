@@ -46,7 +46,46 @@
     padding: 36px 46px;
     border: green dashed 2px;
     width: 450px;
-    
+    height: 100%;
     box-shadow: 1px 1px 10px 1px;
     border-radius: 12px;
+}
+.bd-right-car-name{
+    font-weight: 600;
+}
+.bd-right-car-info-icon{
+   display: flex;
+   gap: 10px;
+   font-size: 12px;
+}
+.bd-right-cate{
+    padding-top: 2px;
+}
+.bd-right-detailorder{
+    display: flex;
+    gap: 20px;
+    padding-top: 10px;
+    background-color: white;
+   
+    
+}
+.accordion{
+    background-color: white !important;
+    border: none white !important;
+}
+.card-header{
+    background-color: white !important;
+    border: none white !important;
+
+}
+.bd-right-detailorder-iconandprice{
+    display: flex;
+    gap: 130px;
+}
+.check-icon-bank{
+    position: relative;
+    left: 380px;
+}
+.accordion-bd-right .card{
+    border-color: transparent !important;
 }

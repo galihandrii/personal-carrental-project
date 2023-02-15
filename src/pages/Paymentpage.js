@@ -4,6 +4,9 @@ import Navbar from "../components-LP/Navbar";
 import "./Paymentpage.css"
 import Bankdetail from "../components-payment/Bankdetail";
 import Footer from "../components-LP/Footer"
+import { useEffect,useState } from "react";
+
+
 
 
 const Paymentpage = () => {
