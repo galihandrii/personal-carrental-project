@@ -21,7 +21,7 @@ function App() {
       <Route path='/register' element={<Registerpage/>}/>
       <Route element={<ProtectedRoute/>}>
       <Route path='/payment/:id' element={<Paymentpage/>}/>
-      <Route path='/payment-confirm/id' element={<PaymentConfirm/>}/>
+      <Route path='/payment-confirm/:id' element={<PaymentConfirm/>}/>
       </Route>
       
       

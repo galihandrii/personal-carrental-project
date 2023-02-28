@@ -13,8 +13,7 @@ const Paymentpage = () => {
     return (
         <div>
             <Navbar/>
-            <div className="bg-plain-1"></div>
-            <Breadcrumb/>
+            <Breadcrumb />
             <div className="bg-plain-2"></div>
             <Paymentdetail className='bg-plain-2-comp'/>
             <Bankdetail/>

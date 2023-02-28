@@ -8,43 +8,55 @@ import axios from "axios";
 import moment from "moment/moment";
 import 'moment/locale/id'
 import { FiUser ,FiChevronDown, FiCheck} from "react-icons/fi";
+import Button from 'react-bootstrap/Button';
 
 
 const Bankdetail = () => {
 const {id} = useParams();
 const [car, setCar] = useState({});
 const navigate = useNavigate();
+const [isDisabled, setIsDisabled] = useState(true)
 const [isBcaTrue, setIsBcaTrue] = useState(false)
 const [isBniTrue, setIsBniTrue] = useState(false)
 const [isMandiriTrue, setIsMandiriTrue] = useState(false)
-const [startDate, setStartDate] = useState(new Date());
-const [endDate, setEndDate] = useState(null);
+const startRent = moment(car.start_rent_at).format('LL')
+const endRent = moment(car.finish_rent_at).format('LL')
+const dateStart = moment(localStorage.getItem("start"))
+const dateEnd = moment(localStorage.getItem("end"))
+const longDate = (Math.round((dateEnd - dateStart) / (1000 * 60 * 60 * 24))) + 1
+const PaymentButton = () => {
+    const [isDisabled, setIsDisabled] = useState(true)
+  }
+  const handleClick = () => {
+    setIsDisabled(false);
+  }
 
-
-
-
-useEffect(()=>{
+  const handleOrderId = async() => {
     const token = localStorage.getItem("token")
     const config = {
         headers: {
             access_token: token
         },  
     }
-    
-  axios
-  .get(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}`,config)
-  .then((ress) => {
-       //console.log(ress)
-      setCar(ress.data)
-  })
-  .catch((err) => console.log(err.message))
-},[])
+
+    try {
+        const res = await axios.get(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}`,config)
+        console.log(res.data)
+         setCar(res.data);
+    } catch (error) {
+        console.log(error.message);
+    }
+  }
+
+    useEffect(() => {
+      handleOrderId()
+    },[])
 
 // const dateStart = moment(localStorage.getItem("start"))
 // const dateEnd = moment(localStorage.getItem("end"))
 // const thePrice = localStorage.getItem('total price')
 
-//const longDate = (Math.round((dateEnd - dateStart) / (1000 * 60 * 60 * 24))) + 1
+
 
 
     function ContextAwareToggle({ children, eventKey, callback }) {
@@ -62,7 +74,7 @@ useEffect(()=>{
                         <FiChevronDown size={24}/>
                     </div>
                     <div className="bd-right-detailorder-price">
-                      <p> Rp </p>
+                      <h6> Rp. {dotCurrency(car.total_price)}</h6>
                     </div>
                 </div>
             </div>
@@ -74,26 +86,35 @@ useEffect(()=>{
         setIsBcaTrue(true)
         setIsBniTrue(false)
         setIsMandiriTrue(false)
-        localStorage.setItem("bank", "bca")
+        localStorage.setItem("bank", "BCA Transfer")
+        handleClick()
     }
 
     const handleBni = () => {
         setIsBcaTrue(false)
         setIsBniTrue(true)
         setIsMandiriTrue(false)
-        localStorage.setItem("bank", "bni")
+        localStorage.setItem("bank", "BNI Transfer")
+        handleClick()
     }
 
     const handleMandiri = () => {
         setIsBcaTrue(false)
         setIsBniTrue(false)
         setIsMandiriTrue(true)
-        localStorage.setItem("bank", "mandiri")
+        localStorage.setItem("bank", "Mandiri Transfer")
+        handleClick()
     }
 
-
+    function dotCurrency(number) {
+        const currency = number;
+        return new Intl.NumberFormat('de-DE').format(currency)
+    }
     
-
+    const handlePayNow = () => {
+        navigate(`/payment-confirm/${id}`)
+    }
+      
 
 
 
@@ -127,9 +148,11 @@ useEffect(()=>{
                    }
                 </div>
             </div>
-            <div className="bd-right">
+            {
+                Object.entries(car).length ? (
+                    <div className="bd-right">
             <div className="bd-right-car-info">
-            <div className="bd-right-car-name">{car.name}</div>
+            <div className="bd-right-car-name"><h5>{car.Car.name}</h5></div>
             <div className="bd-right-car-info-icon">
               <div className="bd-right-icon"><FiUser size={12}/></div>
               <div className="bd-right-cate">
@@ -154,8 +177,39 @@ useEffect(()=>{
               <ContextAwareToggle eventKey="0">Total</ContextAwareToggle>
              </Card.Header>
               <Accordion.Collapse  eventKey="0">
-             <div>
-              <div> </div>
+             <div className="acc-test">
+              <div>
+                <h6>Harga</h6>
+              </div>
+              <div className="sewa-mobil-bd-right">
+                <p>Sewa Mobil Rp. {dotCurrency(car.Car.price)} x {longDate} Hari</p>
+                <h6>Rp. {dotCurrency(car.total_price)}</h6>
+              </div>
+              <div>
+                <h6>Biaya Lainnya</h6>
+              </div>
+              <div className="sewa-mobil-bd-right">
+                <p>Pajak</p>
+                <p className="termasuk-word">Termasuk</p>
+              </div>
+              <div className="sewa-mobil-bd-right">
+                <p>Biaya makan supir</p>
+                <p className="termasuk-word">Termasuk</p>
+              </div>
+              <div>
+                <h6>Belum Teramsuk</h6>
+              </div>
+              <div className="sewa-mobil-bd-right-bottom">
+                <p>Bensin</p>
+                <p>Tol dan Parkir</p>
+              </div>
+              <div className="total-harga-atas-btn">
+                <h6>Total</h6>
+                <h6>Rp. {dotCurrency(car.total_price)}</h6>
+              </div>
+              <div className="btn-payment-bd-right">
+              <Button disabled={isDisabled}   onClick={handlePayNow} variant="success">Bayar</Button>
+              </div>
              </div>
              </Accordion.Collapse>
              </Card>
@@ -164,6 +218,8 @@ useEffect(()=>{
             
 
             </div>
+                ):(null)
+            }
         </div>
     )
 }

@@ -24,7 +24,7 @@ const [car,setCar]= useState({})
 const navigate = useNavigate();
 //const FixPrice = PriceTotal()
 const isPrice = car.price
-const dateCount = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24))
+const dateCount = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24) )
 const totalPrice = isPrice * (dateCount + 1)
 
 const [description, setDescription] = useState([{
@@ -93,6 +93,7 @@ const [description, setDescription] = useState([{
     // formating date
     const start = moment(startDate).format('YYYY-MM-DD')
     const end = moment(endDate).format('YYYY-MM-DD')
+    const token = localStorage.getItem('token');
    
     //console.log(start,end);
    
@@ -115,8 +116,8 @@ const [description, setDescription] = useState([{
             const res = await axios.post('https://bootcamp-rent-cars.herokuapp.com/customer/order',payload,config);
             console.log(res.data)
             // localStorage.setItem('car_id', id)
-            // localStorage.setItem("start", startDate)
-            // localStorage.setItem("end", endDate)
+             localStorage.setItem("start", startDate)
+             localStorage.setItem("end", endDate)
             // localStorage.setItem('total price', FixPrice)
 
             navigate(`/Payment/${res.data.id}`);
@@ -128,13 +129,17 @@ const [description, setDescription] = useState([{
 
     function HandleButton() {
       
-        if ((startDate != null) && (endDate != null) && (dateCount <= 7))  {
+        if ((startDate != null) && (endDate != null) && (dateCount <= 6) && (token))   {
             return(
                 //<Link to={`/payment/${car.id}`} >
                     <Button  onClick={handleBtnSetOrder} variant="success">Lanjutkan Ke Pembayaran</Button>
                 //</Link>
             )
-        }  else  {
+        }  else if ((startDate != null) && (endDate != null) && (dateCount <= 6) && (!token)){
+            return(
+            <Link to='/login'><Button variant="success">Lanjutkan Ke Pembayaran</Button></Link>
+           ) 
+         } else  {
             return(
                 <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Pilih Tanggal Sewa</Tooltip>}>
                     <Button variant="success" className="btn-disable-pick-date">Lanjutkan Ke Pembayaran</Button>

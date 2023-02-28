@@ -8,11 +8,20 @@
     padding-bottom: 40px;
     
 }
+.bc-arrow{
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.bc-arrow p {
+    margin-left: 24px;
+}
 .bc-arrow a {
     text-decoration: none;
     color: black;
     font-size: 18px;
     font-weight: 600;
+    
 }
 
 .bc-word h6{

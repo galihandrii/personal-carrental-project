@@ -6,7 +6,6 @@
 
 .bd-left{
     padding: 30px 46px;
-    border: 2px red dashed;
     width: 780px;
     box-shadow: 1px 1px 10px 1px;
     border-radius: 12px;
@@ -44,7 +43,6 @@
 }
 .bd-right{
     padding: 36px 46px;
-    border: green dashed 2px;
     width: 450px;
     height: 100%;
     box-shadow: 1px 1px 10px 1px;
@@ -88,4 +86,31 @@
 }
 .accordion-bd-right .card{
     border-color: transparent !important;
+}
+.acc-test{
+    width: 100%;
+}
+.sewa-mobil-bd-right{
+    display: flex;
+    justify-content: space-between
+}
+.sewa-mobil-bd-right p{
+    font-size: 14px;
+}
+.sewa-mobil-bd-right-bottom{
+    font-size: 14px;
+}
+.total-harga-atas-btn{
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 0px;
+    border-top: 1px solid grey;
+}
+.btn-payment-bd-right button{
+    width: 100%;
+    height: 100%;
+}
+
+.termasuk-word{
+    color: lightgreen;
 }

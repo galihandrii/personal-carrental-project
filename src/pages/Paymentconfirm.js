@@ -1,9 +1,10 @@
-
-
+import Navbar from "../components-LP/Navbar";
+import Breadcrumb2 from "../components-payment/Breadcrumb2";
 const PaymentConfirm = () => {
     return(
         <div>
-            <h1>Payment Confirm Page</h1>
+            <Navbar/>
+            <Breadcrumb2/>
         </div>
     )
 }
