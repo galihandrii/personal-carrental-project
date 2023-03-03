@@ -4,15 +4,42 @@ import stepone from "../assets/bc-step1.png"
 import steptwo from "../assets/step2-blue.png"
 import stepthree from "../assets/bc-step3.png"
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
 
 
 const Breadcrumb2 = () => {
 const navigate = useNavigate()
 const bankId = localStorage.getItem('bank')
+const [order, setOrder] = useState('')
+const {id} = useParams()
 
 const handleBack = () => {
   return  navigate(-1)
 }
+
+const handleOrderId = async() => {
+  const token = localStorage.getItem("token")
+  const config = {
+      headers: {
+          access_token: token
+      },  
+  }
+
+  try {
+      const res = await axios.get(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}`,config)
+      console.log(res.data)
+       setOrder(res.data);
+  } catch (error) {
+      console.log(error.message);
+  }
+}
+
+  useEffect(() => {
+    handleOrderId()
+  },[])
 
 
 
@@ -20,7 +47,7 @@ const handleBack = () => {
          <div className="bread-crumb">
             <div className="bc-arrow">
             <a href='#' onClick={handleBack}><AiOutlineArrowLeft/>  {bankId}</a>
-            <p>Order Id :</p>
+            <p>Order Id : {order.id}</p>
             </div>
             <div className="bc-step">
             <div className="bc-step-flex">
