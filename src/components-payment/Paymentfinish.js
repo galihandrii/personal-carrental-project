@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
+import ReactCountdown1 from './Reactcountdown1';
+import Reactcountdown from './Reactcountdown';
 
 
 const Paymentfinish = () => {
@@ -34,6 +35,31 @@ const Paymentfinish = () => {
     const handleConfirm = () => {
         setConfirm(true);
     }
+
+    const [files, setFiles] = useState([]);
+    console.log(files);
+  
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({
+      accept: 'image/*',
+      onDrop: acceptedFiles => {
+        setFiles(acceptedFiles.map(file => Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })));
+      }
+    });
+  
+    const style = {
+      borderColor: '#6c757d',
+      borderStyle: 'dashed',
+      backgroundColor: '#fafafa',
+      borderWidth: 2,
+      borderRadius: 5,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 100,
+      transition: 'border .2s ease-in-out'
+    };
 
     function dotCurrency(number) {
         const currency = number;
@@ -85,6 +111,30 @@ const Paymentfinish = () => {
             <p className='judul-1'>{dispDate} {dispTime}</p>
         )
         }
+
+
+        const uploadPaymentSlip = () => {
+
+            const token = localStorage.getItem('token');
+    
+            const configurasi = {
+                headers: {
+                    access_token: token,
+                },
+            };
+    
+            const formData = new FormData();
+            formData.append('slip', files[0]);
+    
+            axios
+                .put(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}/slip`,formData, configurasi)
+                .then((res) => {
+                    console.log(res)
+                    navigate(`/tiket/${res.data.id}`)
+                })
+                .catch((err) => console.log(err))
+          }
+    
 
         const handleAtm = () => {
             setAtm(true)
@@ -189,7 +239,7 @@ const Paymentfinish = () => {
                     <p>{displayDeadline()}</p>
                    </div>
                    <div className='pc-left-top-count'>
-                    <h5>countdown</h5>
+                    <h5><Reactcountdown/></h5>
                    </div>
                 </div>
                 <div className='pc-left-mid'>
@@ -273,20 +323,32 @@ const Paymentfinish = () => {
                 {
                     confirm ? 
                     (<div  className='pc-right-after'>
-                        <div>
+                        <div className='pc-right-after-count'>
                             <div><h6>Konfirmasi Pembayaran</h6></div>
-                            <div>countdown</div>
+                            <div><ReactCountdown1/></div>
                         </div>
-                        <div>
+                        <div className='pc-right-terimakasih'>
                             <p >Terima kasih telah melakukan konfirmasi pembayaran. Pembayaranmu akan segera kami cek tunggu kurang lebih 10 menit untuk mendapatkan konfirmasi.</p>
-                            <p >Upload Bukti Pembayaran</p>
+                            <h6>Upload Bukti Pembayaran</h6>
                             <p >Untuk membantu kami lebih cepat melakukan pengecekan. Kamu bisa upload bukti bayarmu</p>
                         </div>
-                       <div>
-                        dropzone
-                       </div>
+                        <div {...getRootProps()} className="dropzone" style={style}>
+                                                            <input {...getInputProps()} />
+                                                            {isDragActive ?
+                                                                <p>Drop the files here ...</p> :
+                                                                <p>Drag and drop your files here, or click to select files</p>
+                                                            }
+                                                            {files.map(file => (
+                                                                <img
+                                                                key={file.name}
+                                                                src={file.preview}
+                                                                alt={file.name}
+                                                                style={{height: 100, margin: 10}}
+                                                                />
+                                                            ))}
+                         </div>
                        <div className='upload-btn'>
-                       <Button variant="success">upload</Button>
+                       <Button variant="success" onClick={uploadPaymentSlip}>Upload</Button>
                        </div>
 
                     </div>

@@ -8,7 +8,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    border: 1px dashed red;
     width: 700px;
     margin-top: 34px;
 }
@@ -29,6 +28,15 @@
     height: 100%;
     margin-top: 34px;
 }
+.pc-right-terimakasih{
+    margin-top: 12px;
+}
+.pc-right-after-count{
+    display: flex;
+    justify-content: space-between;
+}
+
+
 .pc-left-top{
     display: flex;
     justify-content: space-between;
@@ -84,7 +92,6 @@
 }
 
 .konfirmasi-pembayaran-btn {
-  border: 1px dashed red;
   height: 40px;
   margin-top: 34px;
 }
@@ -102,3 +109,11 @@
     height: 100%;
     margin-top: 0px;
 }
+
+/* REACT COUNTDOWN CSS */
+.countdown-start{
+    color: red;
+    font-weight: 600;
+}
+
+/* =================== */
