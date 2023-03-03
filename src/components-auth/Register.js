@@ -1,4 +1,4 @@
-import "./Login.css"
+import "./Register.css"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import rectangle from "../assets/Rectangle62.png"
@@ -26,7 +26,9 @@ const Register = (props) => {
                  </Button>
                      </Form>
                      <p>Already have an account? <Link to='/Login'><strong>Sign in here</strong></Link></p>
-
+                    {
+                         !!props.error.length && <p className="handle-error-p">{props.error}</p>
+                    }
                 </div>
             </div>
             <div className="login-right">

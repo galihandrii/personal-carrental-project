@@ -42,6 +42,7 @@ const Login = () => {
             const res = await axios.post("https://bootcamp-rent-cars.herokuapp.com/customer/auth/login",payloadLogin);
             localStorage.setItem('token', res.data.access_token);
             navigate("/cari-mobil");
+            alert('selamat anda berhasil Login, Selamat datang di Binar Rentall Car')
         } catch (error) {
             console.log(error.response.data.message);
             setError(error.response.data.message)
@@ -73,7 +74,9 @@ const Login = () => {
                          </Button>
                              </Form>
                              <p>Dont have an account? <Link to='/Register'><strong>Sign up for free</strong></Link></p>
-        
+                            {
+                                !!error.length && <p className="handle-error-p">{error}</p>
+                            }
                         </div>
                 
             </div>
